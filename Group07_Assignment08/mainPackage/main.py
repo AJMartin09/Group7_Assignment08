@@ -1,7 +1,7 @@
 #main.py
 #*************************************************************************************************************************************
 # Names: Trevor Hunt, Andrew Martin, Anna Bowers                                                                                     *
-# emails: huntt3@mail.uc.edu, [], linneabowers@gmail.com                                                                                                 *
+# emails: huntt3@mail.uc.edu, marti6aj@mail.uc.edu, linneabowers@gmail.com                                                                                                 *
 # Assignment Number: Assignment 08                                                                                                   *
 # Due Date: 03/28/2024                                                                                                               *
 # Course/Section: IS4010-001                                                                                                         *
