@@ -36,7 +36,7 @@ print(cursor.fetchone())
 # My own code
 #GroceryStoreSimulator.dbo.tCoupon.[CouponSourceID], GroceryStoreSimulator.dbo.tCouponDetail.AmountOff\
 #Option 1
-'''
+
 cursor.execute("SELECT    count(GroceryStoreSimulator.dbo.tCoupon.[CouponSourceID])\
                 FROM      GroceryStoreSimulator.dbo.tCoupon INNER JOIN\
                 GroceryStoreSimulator.dbo.tCouponDetail ON GroceryStoreSimulator.dbo.tCoupon.CouponID = GroceryStoreSimulator.dbo.tCouponDetail.CouponID INNER JOIN\
@@ -44,21 +44,20 @@ cursor.execute("SELECT    count(GroceryStoreSimulator.dbo.tCoupon.[CouponSourceI
                 WHERE     (GroceryStoreSimulator.dbo.tCouponDetail.Amountoff> 10) and (GroceryStoreSimulator.dbo.tCouponSource.CouponSourceID = 6)" )
 results = cursor.fetchone()
 print("The total number of coupons with a value of more than $10.00 off is " + str(results[0]) + ".")
-'''
+
 '''
 for row in results:
     print(row[0],row[1])
 '''
 
 #Option 2
-cursor.execute("USE GroceryStoreSimulator\
-Select DISTINCT COUNT(*) OVER () AS TotalRowCount--, tCoupon.CouponSourceID, tCouponDetail.Amountoff, tProductPriceHist.PricePerSellableUnit,\
-        FROM tCoupon INNER JOIN\
-               tCouponDetail ON tCoupon.CouponID = tCouponDetail.CouponID INNER JOIN\
-               tCouponSource ON tCoupon.CouponSourceID = tCouponSource.CouponSourceID INNER JOIN\
-                     tProduct ON tCouponDetail.ProductID = tProduct.ProductID INNER JOIN\
-                     tProductPriceHist ON tProductPriceHist.ProductID = tProduct.ProductID\
-               WHERE (tCouponDetail.Amountoff> 10) and (tCouponDetail.Amountoff > tProductPriceHist.PricePerSellableUnit)--and (tCouponSource.CouponSourceID = 6)")
+cursor.execute("Select DISTINCT COUNT(*) OVER () AS TotalRowCount\
+        FROM GroceryStoreSimulator.dbo.tCoupon INNER JOIN\
+               GroceryStoreSimulator.dbo.tCouponDetail ON GroceryStoreSimulator.dbo.tCoupon.CouponID = GroceryStoreSimulator.dbo.tCouponDetail.CouponID INNER JOIN\
+               GroceryStoreSimulator.dbo.tCouponSource ON GroceryStoreSimulator.dbo.tCoupon.CouponSourceID = GroceryStoreSimulator.dbo.tCouponSource.CouponSourceID INNER JOIN\
+               GroceryStoreSimulator.dbo.tProduct ON GroceryStoreSimulator.dbo.tCouponDetail.ProductID = GroceryStoreSimulator.dbo.tProduct.ProductID INNER JOIN\
+               GroceryStoreSimulator.dbo.tProductPriceHist ON tProductPriceHist.ProductID = GroceryStoreSimulator.dbo.tProduct.ProductID\
+               WHERE (GroceryStoreSimulator.dbo.tCouponDetail.Amountoff> 10) and (GroceryStoreSimulator.dbo.tCouponDetail.Amountoff > GroceryStoreSimulator.dbo.tProductPriceHist.PricePerSellableUnit)")
 results = cursor.fetchone()
 '''
 Using the GroceryStoreSimulator data set, this determines how many coupons have a value greater than the price of the product's sellable unit.
